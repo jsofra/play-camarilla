@@ -1,13 +1,12 @@
 // Compiled by ClojureScript 1.10.516 {}
 goog.provide('camarilla.gapi_auth');
 goog.require('cljs.core');
-goog.require('reagent.core');
 goog.require('re_frame.core');
 camarilla.gapi_auth.update_sign_in_status = (function camarilla$gapi_auth$update_sign_in_status(status){
 return re_frame.core.dispatch.call(null,new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword("user","sign-in-status","user/sign-in-status",-184579203),status], null));
 });
 camarilla.gapi_auth.init_gapi_client = (function camarilla$gapi_auth$init_gapi_client(){
-return gapi.client.init(({"clientSecret": "znvN-Ng18hDGOqcYz6rHq5I4", "clientId": "498608089004-f19mc97bsi1v592kshic5fd89gvims57.apps.googleusercontent.com", "discoveryDocs": ["https://sheets.googleapis.com/$discovery/rest?version=v4"], "scope": "https://www.googleapis.com/auth/spreadsheets.readonly"})).then((function (){
+return gapi.client.init(({"clientId": "498608089004-f19mc97bsi1v592kshic5fd89gvims57.apps.googleusercontent.com", "discoveryDocs": ["https://sheets.googleapis.com/$discovery/rest?version=v4"], "scope": "https://www.googleapis.com/auth/spreadsheets.readonly"})).then((function (){
 gapi.auth2.getAuthInstance().isSignedIn.listen(camarilla.gapi_auth.update_sign_in_status);
 
 return camarilla.gapi_auth.update_sign_in_status.call(null,gapi.auth2.getAuthInstance().isSignedIn.get());
@@ -18,7 +17,6 @@ return console.log("gapi init error:",error);
 camarilla.gapi_auth.handle_client_load = (function camarilla$gapi_auth$handle_client_load(){
 return gapi.load("client:auth2",camarilla.gapi_auth.init_gapi_client);
 });
-goog.exportSymbol('camarilla.gapi_auth.handle_client_load', camarilla.gapi_auth.handle_client_load);
 camarilla.gapi_auth.handle_auth_click = (function camarilla$gapi_auth$handle_auth_click(_){
 return gapi.auth2.getAuthInstance().signIn();
 });
